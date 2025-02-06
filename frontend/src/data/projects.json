@@ -1,0 +1,108 @@
+{
+  "projects": [
+    {
+      "id": "1",
+      "title": "Zemon 2.0",
+      "image_url": "/zemon.png",
+      "created_at": "2024-02-14T10:00:00Z",
+      "timeline_entries": [
+        {
+          "id": "1-1",
+          "date": "Q1 2023",
+          "title": "Project Start",
+          "description": "Initial planning and team formation"
+        },
+        {
+          "id": "1-2",
+          "date": "Q2 2023",
+          "title": "Development Phase",
+          "description": "Core features implementation"
+        },
+        {
+          "id": "1-3",
+          "date": "Q3 2023",
+          "title": "Testing",
+          "description": "Quality assurance and bug fixes"
+        },
+        {
+          "id": "1-4",
+          "date": "Q4 2023",
+          "title": "Launch",
+          "description": "Successful project deployment"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Project Beta",
+      "image_url": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop&q=80",
+      "created_at": "2024-02-13T15:30:00Z",
+      "timeline_entries": [
+        {
+          "id": "2-1",
+          "date": "Q3 2023",
+          "title": "Project Inception",
+          "description": "Market research and requirement gathering"
+        },
+        {
+          "id": "2-2",
+          "date": "Q4 2023",
+          "title": "MVP Development",
+          "description": "Building core functionalities"
+        },
+        {
+          "id": "2-3",
+          "date": "Q1 2024",
+          "title": "Beta Testing",
+          "description": "User feedback and improvements"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Project Gamma",
+      "image_url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&auto=format&fit=crop&q=80",
+      "created_at": "2024-02-12T09:15:00Z",
+      "timeline_entries": [
+        {
+          "id": "3-1",
+          "date": "Q4 2023",
+          "title": "Concept Development",
+          "description": "Brainstorming and initial concept development"
+        },
+        {
+          "id": "3-2",
+          "date": "Q1 2024",
+          "title": "Design Phase",
+          "description": "UI/UX design and prototyping"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Project Delta",
+      "image_url": "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&auto=format&fit=crop&q=80",
+      "created_at": "2024-02-10T14:20:00Z",
+      "timeline_entries": [
+        {
+          "id": "4-1",
+          "date": "Q2 2023",
+          "title": "Research Phase",
+          "description": "Market analysis and competitor research"
+        },
+        {
+          "id": "4-2",
+          "date": "Q3 2023",
+          "title": "Development",
+          "description": "Core platform development"
+        },
+        {
+          "id": "4-3",
+          "date": "Q4 2023",
+          "title": "Beta Release",
+          "description": "Limited release to beta testers"
+        }
+      ]
+    }
+  ]
+} 

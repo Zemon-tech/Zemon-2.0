@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply h-full bg-gray-50;
+  }
+  body {
+    @apply h-full;
+  }
+  #root {
+    @apply h-full;
+  }
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+@keyframes firework {
+  0% { 
+    transform: translate(var(--x), var(--initialY)); 
+    width: var(--initialSize); 
+    opacity: 1; 
+  }
+  50% { 
+    width: 0.5vmin; 
+    opacity: 1; 
+  }
+  100% { 
+    width: var(--finalSize); 
+    opacity: 0; 
+  }
+}
+
+@keyframes fireworkParticle {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.firework,
+.firework::before,
+.firework::after {
+  --initialSize: 0.5vmin;
+  --finalSize: 45vmin;
+  --particleSize: 0.2vmin;
+  --color1: yellow;
+  --color2: khaki;
+  --color3: white;
+  --color4: lime;
+  --color5: gold;
+  --color6: mediumseagreen;
+  --y: -30vmin;
+  --x: -50%;
+  --initialY: 60vmin;
+  content: "";
+  animation: firework 2s infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, var(--y));
+  width: var(--initialSize);
+  aspect-ratio: 1;
+  background: 
+    radial-gradient(circle, var(--color1) var(--particleSize), transparent 0) 50% 0%,
+    radial-gradient(circle, var(--color2) var(--particleSize), transparent 0) 0% 100%,
+    radial-gradient(circle, var(--color3) var(--particleSize), transparent 0) 100% 0%,
+    radial-gradient(circle, var(--color4) var(--particleSize), transparent 0) 50% 100%,
+    radial-gradient(circle, var(--color5) var(--particleSize), transparent 0) 0% 50%,
+    radial-gradient(circle, var(--color6) var(--particleSize), transparent 0) 100% 50%;
+  background-size: 0.5vmin 0.5vmin;
+  background-repeat: no-repeat;
+}
+
+.firework::before {
+  --x: -50%;
+  --y: -50%;
+  --initialY: -50%;
+  --rotation: 30deg;
+  transform: translate(-50%, -50%) rotate(var(--rotation));
+}
+
+.firework::after {
+  --x: -50%;
+  --y: -50%;
+  --initialY: -50%;
+  --rotation: 60deg;
+  transform: translate(-50%, -50%) rotate(var(--rotation));
+}
+
+.firework:nth-child(2) {
+  --x: 30vmin;
+  --initialY: 70vmin;
+}
+
+.firework:nth-child(2)::before {
+  --rotation: 20deg;
+}
+
+.firework:nth-child(2)::after {
+  --rotation: 40deg;
+}
+
+.firework:nth-child(3) {
+  --x: -30vmin;
+  --initialY: 80vmin;
+}
+
+.firework:nth-child(3)::before {
+  --rotation: 40deg;
+}
+
+.firework:nth-child(3)::after {
+  --rotation: 80deg;
+} 

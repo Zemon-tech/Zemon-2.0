@@ -1,0 +1,171 @@
+.quill-editor {
+  height: 100%;
+}
+
+.ql-container {
+  height: calc(100% - 42px) !important;
+  font-size: 16px;
+}
+
+.ql-editor {
+  height: 100% !important;
+  padding: 12px 15px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.ql-toolbar.ql-snow {
+  border: none;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 8px 15px;
+}
+
+.ql-container.ql-snow {
+  border: none;
+  font-family: inherit;
+  font-size: 16px;
+  height: calc(100% - 80px) !important;
+}
+
+.ql-editor.ql-blank::before {
+  font-style: normal;
+  color: #9ca3af;
+}
+
+.ql-editor h1 {
+  font-size: 2em;
+  font-weight: 600;
+}
+
+.ql-editor h2 {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.ql-editor h3 {
+  font-size: 1.17em;
+  font-weight: 600;
+}
+
+.ql-editor p {
+  margin-bottom: 0.5em;
+}
+
+.ql-editor blockquote {
+  border-left: 4px solid #e5e7eb;
+  padding-left: 16px;
+  margin: 16px 0;
+}
+
+.ql-editor code-block {
+  background-color: #f3f4f6;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+/* Make sure toolbar buttons are clickable */
+.ql-toolbar button {
+  cursor: pointer !important;
+}
+
+/* Toolbar button styles */
+.ql-toolbar .ql-stroke {
+  stroke: #6b7280;
+}
+
+.ql-toolbar .ql-fill {
+  fill: #6b7280;
+}
+
+.ql-toolbar button:hover .ql-stroke {
+  stroke: #4f46e5;
+}
+
+.ql-toolbar button:hover .ql-fill {
+  fill: #4f46e5;
+}
+
+.ql-toolbar button.ql-active .ql-stroke {
+  stroke: #4f46e5;
+}
+
+.ql-toolbar button.ql-active .ql-fill {
+  fill: #4f46e5;
+}
+
+/* Toolbar button styles */
+.ql-toolbar.ql-snow .ql-formats {
+  margin-right: 15px;
+}
+
+.ql-toolbar.ql-snow button {
+  width: 28px;
+  height: 28px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.ql-toolbar.ql-snow button:hover {
+  color: #4f46e5;
+}
+
+/* Dropdown styles */
+.ql-toolbar.ql-snow .ql-picker {
+  height: 28px;
+}
+
+.ql-toolbar.ql-snow .ql-picker-label {
+  padding: 3px 28px 3px 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+}
+
+/* Active state styles */
+.ql-toolbar.ql-snow .ql-active {
+  background-color: #eef2ff;
+  border-radius: 4px;
+}
+
+/* Format-specific styles */
+.ql-editor h1 {
+  font-size: 2em;
+  font-weight: 600;
+}
+
+.ql-editor h2 {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.ql-editor h3 {
+  font-size: 1.17em;
+  font-weight: 600;
+}
+
+.ql-editor pre.ql-syntax {
+  background-color: #1f2937;
+  color: #e5e7eb;
+  padding: 16px;
+  border-radius: 4px;
+}
+
+/* Placeholder style */
+.ql-editor.ql-blank::before {
+  font-style: normal;
+  color: #9ca3af;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+/* Link styles */
+.ql-editor a {
+  color: #4f46e5;
+  text-decoration: underline;
+}
+
+/* Code block styles */
+.ql-editor pre {
+  background: #f3f4f6;
+  border-radius: 4px;
+  padding: 16px;
+} 

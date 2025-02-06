@@ -1,0 +1,29 @@
+.stages-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(203, 213, 225, 1) transparent;
+}
+
+.stages-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.stages-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.stages-container::-webkit-scrollbar-thumb {
+  background-color: rgba(203, 213, 225, 1);
+  border-radius: 3px;
+}
+
+.stages-container button {
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+/* Show only 3 stages by default */
+.stages-container {
+  max-height: 132px; /* 40px height per button + 6px gap between = 3 items */
+  overflow-y: auto;
+} 

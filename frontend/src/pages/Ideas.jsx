@@ -19,15 +19,34 @@ export default function Ideas() {
   const { ideas, loading, error } = useSelector((state) => state.ideas);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [sortBy, setSortBy] = useState('latest');
 
   useEffect(() => {
     dispatch(fetchIdeas());
   }, [dispatch]);
 
-  const filteredIdeas = ideas.filter(idea => 
-    idea.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    idea.description.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const getFilteredAndSortedIdeas = () => {
+    let filtered = ideas.filter(idea => 
+      idea.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      idea.description.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    return [...filtered].sort((a, b) => {
+      switch (sortBy) {
+        case 'mostVoted':
+          return (b.votes?.length || 0) - (a.votes?.length || 0);
+        case 'mostCommented':
+          return (b.comments?.length || 0) - (a.comments?.length || 0);
+        case 'oldest':
+          return new Date(a.createdAt) - new Date(b.createdAt);
+        case 'latest':
+        default:
+          return new Date(b.createdAt) - new Date(a.createdAt);
+      }
+    });
+  };
+
+  const filteredIdeas = getFilteredAndSortedIdeas();
 
   // Calculate statistics
   const ideaStats = {
@@ -95,8 +114,9 @@ export default function Ideas() {
             </div>
           </div>
 
-          {/* Search Bar */}
-          <div className="mt-6 bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+          {/* Search and Sort Section */}
+          <div className="mt-6 bg-white rounded-lg shadow-sm border border-gray-200 p-4 space-y-4">
+            {/* Search Bar */}
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" />
@@ -108,6 +128,53 @@ export default function Ideas() {
                 placeholder="Search ideas..."
                 className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
               />
+            </div>
+
+            {/* Sort Options */}
+            <div className="flex items-center space-x-2">
+              <span className="text-sm text-gray-500">Sort by:</span>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => setSortBy('latest')}
+                  className={`px-3 py-1 text-sm rounded-full ${
+                    sortBy === 'latest'
+                      ? 'bg-indigo-100 text-indigo-700 font-medium'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  Latest Ideas
+                </button>
+                <button
+                  onClick={() => setSortBy('mostVoted')}
+                  className={`px-3 py-1 text-sm rounded-full ${
+                    sortBy === 'mostVoted'
+                      ? 'bg-indigo-100 text-indigo-700 font-medium'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  Most Voted
+                </button>
+                <button
+                  onClick={() => setSortBy('mostCommented')}
+                  className={`px-3 py-1 text-sm rounded-full ${
+                    sortBy === 'mostCommented'
+                      ? 'bg-indigo-100 text-indigo-700 font-medium'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  Most Commented
+                </button>
+                <button
+                  onClick={() => setSortBy('oldest')}
+                  className={`px-3 py-1 text-sm rounded-full ${
+                    sortBy === 'oldest'
+                      ? 'bg-indigo-100 text-indigo-700 font-medium'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  Oldest First
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -286,6 +286,12 @@ export default function TaskDetails() {
                 <CalendarIcon className="h-5 w-5 mr-2" />
                 <span>Due: {new Date(currentTask.deadline).toLocaleDateString()}</span>
               </div>
+              {currentTask.createdBy && (
+                <div className="flex items-center">
+                  <UserCircleIcon className="h-5 w-5 mr-2" />
+                  <span>Created by: {currentTask.createdBy.name}</span>
+                </div>
+              )}
               {currentTask.teamLeader && (
                 <div className="flex items-center">
                   <UserCircleIcon className="h-5 w-5 mr-2" />

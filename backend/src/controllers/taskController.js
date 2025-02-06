@@ -12,7 +12,8 @@ exports.getTasks = async (req, res) => {
       ]
     })
     .populate('assignees', 'name email')
-    .populate('teamLeader', 'name email');
+    .populate('teamLeader', 'name email')
+    .populate('createdBy', 'name email');
     
     res.json(tasks);
   } catch (error) {

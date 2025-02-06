@@ -27,6 +27,8 @@ export default function Dashboard() {
   const { tasks, loading: tasksLoading } = useSelector((state) => state.tasks);
   const { ideas, loading: ideasLoading } = useSelector((state) => state.ideas);
   const { chats, loading: chatsLoading } = useSelector((state) => state.chat);
+  const [activityFilter, setActivityFilter] = useState('all'); // 'all', 'tasks', 'completed'
+  const [filteredActivities, setFilteredActivities] = useState([]);
 
   useEffect(() => {
     dispatch(fetchTasks());
@@ -140,6 +142,48 @@ export default function Dashboard() {
     }
   };
 
+  // Modify the useEffect that handles filtering
+  useEffect(() => {
+    let activities = [];
+    
+    // Get tasks with activity type and status
+    const taskActivities = tasks.map(task => ({
+      ...task,
+      activityType: 'task',
+      timestamp: new Date(task.createdAt).getTime(),
+      status: task.status || (task.completed ? 'completed' : 'pending')
+    }));
+
+    // Apply filters
+    switch (activityFilter) {
+      case 'tasks':
+        // Show all tasks
+        activities = [...taskActivities];
+        break;
+      case 'completed':
+        // Show only completed tasks
+        activities = taskActivities.filter(
+          activity => activity.status === 'completed' || activity.completed === true
+        );
+        break;
+      case 'pending':
+        // Show only pending tasks
+        activities = taskActivities.filter(
+          activity => activity.status === 'pending' || (!activity.completed && activity.status !== 'completed')
+        );
+        break;
+      default:
+        // 'all' case - show everything
+        activities = [...taskActivities];
+        break;
+    }
+
+    // Sort by timestamp (most recent first)
+    activities.sort((a, b) => b.timestamp - a.timestamp);
+
+    setFilteredActivities(activities);
+  }, [tasks, activityFilter]);
+
   return (
     <div className="py-6 min-h-screen bg-gray-50">
       <Toaster 
@@ -173,11 +217,23 @@ export default function Dashboard() {
                 </p>
               </div>
               <div className="flex flex-wrap gap-3">
-                <button 
-                  onClick={handleCreateTask}
-                  className="bg-white/15 hover:bg-white/25 text-white px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-105">
-                  Create Task
-                </button>
+                {/* Show Create Task only for admin and team leader */}
+                {(user?.role === 'admin' || user?.role === 'team-leader') && (
+                  <button 
+                    onClick={handleCreateTask}
+                    className="bg-white/15 hover:bg-white/25 text-white px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-105">
+                    Create Task
+                  </button>
+                )}
+                {/* Show Chat shortcut for team members */}
+                {user?.role === 'user' && (
+                  <button 
+                    onClick={() => navigate('/chat')}
+                    className="bg-white/15 hover:bg-white/25 text-white px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-105 flex items-center">
+                    <ChatBubbleLeftRightIcon className="h-5 w-5 mr-2" />
+                    Open Chat
+                  </button>
+                )}
                 <button 
                   onClick={handleScheduleMeeting}
                   className="bg-white/15 hover:bg-white/25 text-white px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-105">
@@ -299,45 +355,42 @@ export default function Dashboard() {
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-semibold text-gray-900">Recent Activity</h2>
               <div className="flex items-center gap-3">
-                <button className="text-sm text-gray-500 hover:text-gray-700 px-3 py-1 rounded-lg hover:bg-gray-50 transition-colors">
-                  Filter
-                </button>
+                <select
+                  value={activityFilter}
+                  onChange={(e) => setActivityFilter(e.target.value)}
+                  className="text-sm text-gray-500 px-3 py-1 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="all">All Tasks</option>
+                  <option value="pending">Pending</option>
+                  <option value="completed">Completed</option>
+                </select>
                 <ClockIcon className="h-5 w-5 text-gray-400" />
               </div>
             </div>
             <div className="space-y-4">
-              {tasksLoading ? (
-                <div className="flex justify-center py-8">
-                  <div className="animate-pulse flex space-x-4">
-                    <div className="h-12 w-12 bg-gray-200 rounded-full"></div>
-                    <div className="space-y-3 flex-1">
-                      <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                      <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-                    </div>
-                  </div>
-                </div>
-              ) : tasks.slice(0, 4).map((task) => (
+              {filteredActivities.map((activity) => (
                 <div 
-                  key={task._id} 
-                  onClick={() => handleTaskClick(task._id)}
-                  className="group flex items-center space-x-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100/80 transition-all duration-200 cursor-pointer">
+                  key={activity._id} 
+                  onClick={() => handleTaskClick(activity._id)}
+                  className="group flex items-center space-x-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100/80 transition-all duration-200 cursor-pointer"
+                >
                   <div className={`w-2.5 h-2.5 rounded-full ${
-                    task.completed ? 'bg-green-500' : 'bg-blue-500'
+                    activity.completed ? 'bg-green-500' : 'bg-blue-500'
                   } group-hover:scale-110 transition-transform`} />
                   <div className="flex-1">
                     <h3 className="text-sm font-medium text-gray-900 group-hover:text-gray-700">
-                      {task.title}
+                      {activity.title}
                     </h3>
                     <p className="text-xs text-gray-500 mt-1 line-clamp-2">
-                      {task.description}
+                      {activity.description}
                     </p>
                     <div className="flex items-center gap-2 mt-2">
                       <span className="text-xs text-gray-400">
-                        {new Date(task.createdAt).toLocaleDateString()}
+                        {new Date(activity.createdAt).toLocaleDateString()}
                       </span>
-                      {task.priority && (
+                      {activity.priority && (
                         <span className="text-xs px-2.5 py-1 rounded-full bg-yellow-100 text-yellow-800 font-medium">
-                          {task.priority}
+                          {activity.priority}
                         </span>
                       )}
                     </div>

@@ -62,13 +62,21 @@ export default function TaskList({ tasks, onEdit, onDelete, onStatusChange, onSt
             {/* Title */}
             <h3 className="text-lg font-semibold text-gray-900 text-center mb-4 truncate">{task.title}</h3>
 
-            {/* Add Team Leader info */}
-            {task.teamLeader && (
-              <div className="mb-4 flex items-center text-sm text-gray-600">
-                <UserGroupIcon className="h-4 w-4 mr-1.5" />
-                <span>Team Lead: {task.teamLeader.name}</span>
-              </div>
-            )}
+            {/* Add Creator and Team Leader info */}
+            <div className="mb-4 space-y-2">
+              {task.createdBy && (
+                <div className="flex items-center text-sm text-gray-600">
+                  <UserGroupIcon className="h-4 w-4 mr-1.5" />
+                  <span>Created by: {task.createdBy?.name || 'Unknown'}</span>
+                </div>
+              )}
+              {task.teamLeader && (
+                <div className="flex items-center text-sm text-gray-600">
+                  <UserGroupIcon className="h-4 w-4 mr-1.5" />
+                  <span>Team Lead: {task.teamLeader?.name || 'Unknown'}</span>
+                </div>
+              )}
+            </div>
 
             {/* Status and Priority Row */}
             <div className="flex justify-between items-center gap-3 mb-4">

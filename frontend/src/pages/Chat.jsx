@@ -12,6 +12,7 @@ import ChatWindow from "../components/chat/ChatWindow";
 import NewChatModal from "../components/chat/NewChatModal";
 import { supabase } from "../utils/supabase";
 import axios from "axios";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 export default function Chat() {
   const dispatch = useDispatch();
@@ -19,13 +20,32 @@ export default function Chat() {
   const [isNewChatModalOpen, setIsNewChatModalOpen] = useState(false);
   const currentUser = useSelector((state) => state.auth.user);
   const otherUser = useSelector((state) => state.auth.otherUser);
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth < 768);
+  const [showChatList, setShowChatList] = useState(true);
+
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobileView(mobile);
+      if (!mobile) {
+        setShowChatList(true);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Store active chat ID in local storage
   useEffect(() => {
     if (activeChat) {
       localStorage.setItem('activeChatId', activeChat._id);
+      if (isMobileView) {
+        setShowChatList(false);
+      }
     }
-  }, [activeChat]);
+  }, [activeChat, isMobileView]);
 
   // Restore active chat on component mount
   useEffect(() => {
@@ -96,7 +116,6 @@ export default function Chat() {
           filter: `user_id=eq.${currentUser.id}`
         },
         (payload) => {
-          // Refresh chats when member changes occur
           dispatch(fetchChats());
         }
       )
@@ -122,7 +141,6 @@ export default function Chat() {
           filter: `chat_id=eq.${activeChat._id}`
         },
         async (payload) => {
-          // Get sender details from the cache or fetch them
           let sender = chats
             .find(c => c._id === activeChat._id)
             ?.participants
@@ -167,15 +185,13 @@ export default function Chat() {
       try {
         console.log("Sending message:", message, "Current user:", currentUser);
         
-        // Send to backend first and wait for response
-        const result = await dispatch(
+        await dispatch(
           sendMessage({
             chatId: activeChat._id,
             content: message,
           })
         ).unwrap();
 
-        // Don't add message to UI here since it will come through the subscription
         console.log("Message sent successfully");
       } catch (error) {
         console.error("Failed to send message:", error);
@@ -190,12 +206,15 @@ export default function Chat() {
         await dispatch(deleteChat(chatId)).unwrap();
         if (activeChat?._id === chatId) {
           dispatch(setActiveChat(null));
+          if (isMobileView) {
+            setShowChatList(true);
+          }
         }
       } catch (error) {
         console.error("Failed to delete chat:", error);
       }
     },
-    [dispatch, activeChat]
+    [dispatch, activeChat, isMobileView]
   );
 
   const handleChatSelect = useCallback(
@@ -205,10 +224,22 @@ export default function Chat() {
     [dispatch]
   );
 
+  const handleBackToList = () => {
+    setShowChatList(true);
+  };
+
   return (
     <div className="h-screen flex bg-white">
-      {/* Left Column: Chat List */}
-      <div className="w-[350px] border-r border-gray-200 flex flex-col">
+      {/* Chat List */}
+      <div 
+        className={`${
+          isMobileView 
+            ? showChatList 
+              ? 'w-full' 
+              : 'hidden' 
+            : 'w-[350px] border-r border-gray-200'
+        } flex flex-col`}
+      >
         <ChatList
           chats={chats}
           activeChat={activeChat}
@@ -220,8 +251,23 @@ export default function Chat() {
         />
       </div>
 
-      {/* Right Column: Chat Window */}
-      <div className="flex-1 flex flex-col">
+      {/* Chat Window */}
+      <div 
+        className={`flex-1 flex flex-col ${
+          isMobileView && showChatList ? 'hidden' : ''
+        }`}
+      >
+        {isMobileView && activeChat && (
+          <div className="p-2 border-b border-gray-200">
+            <button
+              onClick={handleBackToList}
+              className="flex items-center text-gray-600 hover:text-gray-900"
+            >
+              <ArrowLeftIcon className="h-5 w-5 mr-1" />
+              Back to Chats
+            </button>
+          </div>
+        )}
         <ChatWindow
           chat={activeChat}
           onSendMessage={handleSendMessage}

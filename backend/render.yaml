@@ -3,7 +3,7 @@ services:
     name: zemon-backend
     env: node
     buildCommand: npm install
-    startCommand: npm run dev
+    startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production

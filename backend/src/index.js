@@ -42,7 +42,8 @@ app.use(cors({
   origin: [
     'http://localhost:5173',
     'http://localhost:3000',
-    process.env.FRONTEND_URL
+    process.env.FRONTEND_URL,
+    'https://zemon.vercel.app'
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],

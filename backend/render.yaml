@@ -12,4 +12,6 @@ services:
       - key: JWT_SECRET
         sync: false
       - key: FRONTEND_URL
-        sync: false 
+        sync: false
+      - key: PORT
+        value: 80 

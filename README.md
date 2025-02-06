@@ -1,175 +1,67 @@
+<p align="center">
+  <img src="frontend/public/logo.svg" alt="Zemon 2.0 Logo" width="150"/>
+</p>
+
+<h1 align="center">Zemon 2.0</h1>
+
+<p align="center">
+  A modern team management platform designed for seamless collaboration, task tracking, and real-time communication.
+</p>
 
 ---
 
-Zemon2.0
+## 🔗 Live Demo
 
-Zemon2.0 is a modern team management platform designed to streamline collaboration and project management. It offers a suite of features including task management, idea sharing, real-time chat, and resource management, all within an intuitive interface.
-
-
----
-
-🔥 Features
-
-✅ Task Management
-
-Create, Assign, and Track Tasks: Efficiently manage tasks by creating, assigning, and monitoring progress.
-
-Set Priorities and Deadlines: Organize tasks by setting priorities and due dates to ensure timely completion.
-
-Filter and Search Functionality: Quickly locate tasks using advanced filtering and search options.
-
-Task Comments and Attachments: Enhance collaboration by adding comments and attaching relevant files.
-
-
-💡 Idea Sharing
-
-Share and Discuss Ideas: Foster innovation by sharing and discussing ideas within the team.
-
-Voting System: Empower team members to vote on ideas.
-
-Resource Linking: Associate ideas with relevant resources for comprehensive context.
-
-Comment Threads: Engage in detailed discussions through threaded comments.
-
-
-💬 Real-Time Chat
-
-Instant Messaging: Communicate with team members in real time.
-
-File Sharing: Share files to facilitate collaboration.
-
-Team Channels: Create dedicated channels for different topics or projects.
-
-Direct Messaging: Engage in private conversations with team members.
-
-
-📂 Resource Management
-
-Centralized Resource Library: Maintain a centralized repository for all project-related resources.
-
-Category Organization: Organize resources into categories for easy retrieval.
-
-
-📊 Admin Dashboard
-
-User Management: Oversee user roles and permissions.
-
-Activity Monitoring: Track user activities to ensure productivity.
-
-Analytics and Reporting: Gain insights through analytics and reporting tools.
-
-
+[Visit Zemon 2.0](YOUR_LIVE_SITE_URL)
 
 ---
 
-💻 Tech Stack
+## 🏗 Tech Stack
 
-🌐 Frontend
-
-React 18 - Dynamic and responsive user interface
-
-Redux Toolkit - Efficient state management
-
-Tailwind CSS - Sleek and modern styling
-
-React Router 6 - Seamless navigation
-
-Axios - API request handling
-
-
-🔙 Backend
-
-Node.js - Server-side runtime environment
-
-Express.js - RESTful API framework
-
-Supabase - Scalable and secure data storage
-
-Socket.io - Real-time, bidirectional communication
-
-
+<p align="center">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" width="50" height="50"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" width="50" height="50"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express.js" width="50" height="50"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" width="50" height="50"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" alt="Vercel" width="50" height="50"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/render/render-original.svg" alt="Render" width="50" height="50"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" width="50" height="50"/>
+</p>
 
 ---
 
-🚀 Installation Guide
+## 📌 Features
 
-Follow these steps to set up the project locally:
+- **Task Management** – Assign, track, and manage tasks efficiently.
+- **Real-Time Chat** – Instant messaging with media sharing.
+- **Idea Sharing** – Collaborate on new ideas and vote on them.
+- **Resource Management** – Upload and manage project files.
+- **Authentication** – Secure login with Supabase Auth.
 
-1️⃣ Clone the Repository
+---
 
-git clone https://github.com/Zemon-tech/Zemon2.0-test.git
-cd Zemon2.0-test
+## 🛠 Installation
 
-2️⃣ Install Dependencies
+### 1️⃣ Clone the repository
 
-Navigate to the frontend directory:
+```bash
+git clone https://github.com/Zemon-tech/Zemon-2.0.git
+cd Zemon-2.0
 
-cd frontend
+# Backend setup
+cd backend
 npm install
 
-Navigate to the backend directory:
-
-cd ../backend
+# Frontend setup
+cd ../frontend
 npm install
 
+# Start backend server
+cd backend
+npm start
 
-3️⃣ Set Up Environment Variables
-
-Create a .env file in both the frontend and backend directories, and configure the necessary environment variables.
-
-
-4️⃣ Start the Development Servers
-
-Frontend
-
+# Start frontend development server
 cd ../frontend
 npm start
 
-Backend
-
-cd ../backend
-npm start
-
-
-
----
-
-🛠 Contributing
-
-We welcome contributions to enhance Zemon2.0. Follow these steps to contribute:
-
-1. Fork the Repository
-
-
-2. Clone Your Fork
-
-git clone https://github.com/your-username/Zemon2.0-test.git
-cd Zemon2.0-test
-
-
-3. Create a New Branch
-
-git checkout -b feature/your-feature-name
-
-
-4. Make Your Changes
-
-
-5. Commit and Push Your Changes
-
-git add .
-git commit -m "Add your message here"
-git push origin feature/your-feature-name
-
-
-6. Create a Pull Request
-
-
-
-
----
-
-🌟 Note
-
-There are many features that are currently in the building state, stay tuned for more updates!
 

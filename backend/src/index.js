@@ -27,7 +27,9 @@ const io = socketIO(server, {
     origin: [
       'http://localhost:5173',
       'http://localhost:3000',
-      process.env.FRONTEND_URL
+      process.env.FRONTEND_URL,
+      'https://zemon.vercel.app',
+      'https://zemon-2-0.vercel.app'
     ],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true
@@ -43,7 +45,8 @@ app.use(cors({
     'http://localhost:5173',
     'http://localhost:3000',
     process.env.FRONTEND_URL,
-    'https://zemon.vercel.app'
+    'https://zemon.vercel.app',
+    'https://zemon-2-0.vercel.app'
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],

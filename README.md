@@ -1,11 +1,7 @@
 <div align="center">
   <img src="frontend/public/logo.svg" alt="Zemon 2.0" width="200"/>
 
-  <h1>
-    <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/soundcloud.svg" width="28" style="margin-right: 10px"/>
-    Zemon 2.0
-    <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/soundcloud.svg" width="28" style="margin-left: 10px"/>
-  </h1>
+
 
   <p>
     <em>Where Music Meets Productivity: The Next-Gen Team Collaboration Platform</em>

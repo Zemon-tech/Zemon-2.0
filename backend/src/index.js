@@ -16,6 +16,7 @@ const resourceRoutes = require('./routes/resources');
 const projectRoutes = require('./routes/projects');
 const adminRoutes = require('./routes/admin');
 const userRoutes = require('./routes/users');
+const musicRoutes = require('./routes/music');
 
 // Load environment variables
 dotenv.config();
@@ -78,6 +79,7 @@ app.use('/api/resources', resourceRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/music', musicRoutes);
 
 // Socket.IO connection handling
 io.on('connection', (socket) => {

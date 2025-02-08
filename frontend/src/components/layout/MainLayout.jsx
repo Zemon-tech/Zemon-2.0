@@ -17,11 +17,10 @@ import {
   UsersIcon,
   FolderIcon,
   ArrowRightOnRectangleIcon,
-  DocumentDuplicateIcon,
-  ChartBarIcon,
-  TrophyIcon
+  MusicalNoteIcon
 } from '@heroicons/react/24/outline';
 import { logout } from '../../store/slices/authSlice';
+import MusicPlayer from '../MusicPlayer';
 
 export default function MainLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -36,13 +35,14 @@ export default function MainLayout({ children }) {
     { name: 'Tasks', href: '/tasks', icon: ClipboardDocumentListIcon },
     { name: 'Ideas', href: '/ideas', icon: LightBulbIcon },
     { name: 'Chat', href: '/chat', icon: ChatBubbleLeftRightIcon },
-    { name: 'Resources', href: '/resources', icon: DocumentDuplicateIcon },
-    { name: 'Wall of Victory', href: '/wallofvictory', icon: TrophyIcon },
+    { name: 'Resources', href: '/resources', icon: DocumentChartBarIcon },
+    { name: 'Wall of Victory', href: '/wallofvictory', icon: DocumentChartBarIcon },
   ];
 
   const adminNavigation = [
     { name: 'Manage Users', href: '/admin/users', icon: UsersIcon },
-    { name: 'Reports', href: '/admin/reports', icon: ChartBarIcon },
+    { name: 'Reports', href: '/admin/reports', icon: DocumentChartBarIcon },
+    { name: 'Music Manager', href: '/admin/music', icon: MusicalNoteIcon },
   ];
 
   const formatRole = (role) => {
@@ -209,6 +209,9 @@ export default function MainLayout({ children }) {
           </div>
         </main>
       </div>
+
+      {/* Add MusicPlayer */}
+      <MusicPlayer />
     </div>
   );
 } 

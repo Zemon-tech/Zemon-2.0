@@ -16,9 +16,9 @@ import AdminReports from './pages/admin/Reports';
 import Resources from './pages/Resources';
 import WallOfVictory from './pages/WallOfVictory';
 import ProjectDetail from './pages/ProjectDetail';
-import Favicon from './components/common/Favicon';
 import { initializeAuth } from './store/slices/authSlice';
 import TaskDetails from './pages/TaskDetails';
+import MusicManager from './pages/MusicManager';
 
 function PrivateRoute({ children, requireAdmin, requireTeamLeader }) {
   const { token, user } = useSelector((state) => state.auth);
@@ -49,7 +49,6 @@ function App() {
 
     
     <Router>
-      <Favicon />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -82,6 +81,14 @@ function App() {
               <MainLayout>
                 <AdminReports />
               </MainLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin/music"
+          element={
+            <PrivateRoute requireAdmin>
+              <MusicManager />
             </PrivateRoute>
           }
         />

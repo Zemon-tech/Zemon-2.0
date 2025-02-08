@@ -12,7 +12,7 @@
   </p>
 
   <p>
-    <a href="https://zemon-2.vercel.app">
+    <a href="https://zemon-2-0.vercel.app">
       <img src="https://img.shields.io/badge/VIEW_DEMO-LIVE_PREVIEW-2ea44f?style=for-the-badge&logo=vercel" alt="Live Demo"/>
     </a>
   </p>

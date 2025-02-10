@@ -100,8 +100,8 @@ Zemon 2.0 is a revolutionary team collaboration platform that combines productiv
 ## 🎮 Demo & Screenshots
 
 <div align="center">
-  <img src="path/to/screenshot1.png" alt="Dashboard" width="45%"/>
-  <img src="path/to/screenshot2.png" alt="Task Board" width="45%"/>
+  <img src="frontend/public/Screenshot1.png" alt="Dashboard" width="45%"/>
+  <img src="frontend/public/Screenshot2.png" alt="Task Board" width="45%"/>
 </div>
 
 ## 🚀 Quick Start

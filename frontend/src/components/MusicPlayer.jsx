@@ -11,6 +11,7 @@ import {
   XMarkIcon,
   MusicalNoteIcon
 } from '@heroicons/react/24/solid';
+import { toast } from 'react-hot-toast';
 
 export default function MusicPlayer() {
   const [music, setMusic] = useState([]);
@@ -23,7 +24,10 @@ export default function MusicPlayer() {
   const [isWidgetReady, setIsWidgetReady] = useState(false);
 
   useEffect(() => {
-    fetchMusic();
+    const token = localStorage.getItem('token');
+    if (token) {
+      fetchMusic();
+    }
   }, []);
 
   useEffect(() => {
@@ -111,10 +115,20 @@ export default function MusicPlayer() {
 
   const fetchMusic = async () => {
     try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.log('No authentication token found');
+        return;
+      }
+
       const response = await axiosInstance.get('/music');
       setMusic(response.data);
     } catch (error) {
       console.error('Failed to fetch music:', error);
+      // Don't show error if it's an auth error and we're not logged in
+      if (error.response?.status !== 401) {
+        toast.error('Failed to load music');
+      }
     }
   };
 

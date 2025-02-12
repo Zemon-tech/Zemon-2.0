@@ -25,6 +25,12 @@ COPY --from=build /app/dist /usr/share/nginx/html
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
+# Remove default nginx configuration
+RUN rm -rf /etc/nginx/conf.d/default.conf.default
+
+# Create directory for pid file
+RUN mkdir -p /run/nginx
+
 # Expose port
 EXPOSE 3000
 

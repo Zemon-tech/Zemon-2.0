@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
+const musicRoutes = require('./routes/music');
 
 const app = express();
 
@@ -13,7 +14,7 @@ app.use(cors({
   origin: [
     'http://localhost:5173', 
     'http://localhost:5174',
-    process.env.FRONTEND_URL // Add your Vercel domain
+    process.env.FRONTEND_URL
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
@@ -37,6 +38,7 @@ app.use((err, req, res, next) => {
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/tasks', require('./routes/tasks'));
 app.use('/api/admin', require('./routes/admin'));
+app.use('/api/music', musicRoutes);
 // ... other routes
 
 const PORT = process.env.PORT || 5001;

@@ -19,6 +19,16 @@ export default {
           800: '#075985',
           900: '#0c4a6e',
         },
+      },
+      animation: {
+        'bounce-slow': 'bounce 2s infinite',
+        'progress': 'progress 2s linear infinite',
+      },
+      keyframes: {
+        progress: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' }
+        }
       }
     },
   },

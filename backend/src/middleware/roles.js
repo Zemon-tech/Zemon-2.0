@@ -1,24 +1,23 @@
-exports.isAdminOrTeamLeader = async (req, res, next) => {
-  try {
-    console.log('Role middleware - user:', {
-      id: req.user._id,
-      role: req.user.role
-    });
-
-    if (!req.user) {
-      return res.status(401).json({ message: 'Authentication required' });
-    }
-
-    if (req.user.role !== 'admin' && req.user.role !== 'team-leader') {
-      return res.status(403).json({ 
-        message: 'Access denied. Admin or team leader role required',
-        currentRole: req.user.role
-      });
-    }
-
+exports.isAdmin = (req, res, next) => {
+  if (req.user && req.user.role === 'admin') {
     next();
-  } catch (error) {
-    console.error('Role middleware error:', error);
-    res.status(500).json({ message: 'Server error in role middleware' });
+  } else {
+    res.status(403).json({ error: 'Access denied. Admin only.' });
+  }
+};
+
+exports.isTeamLeader = (req, res, next) => {
+  if (req.user && (req.user.role === 'team-leader' || req.user.role === 'admin')) {
+    next();
+  } else {
+    res.status(403).json({ error: 'Access denied. Team leader or admin only.' });
+  }
+};
+
+exports.isAdminOrTeamLeader = (req, res, next) => {
+  if (req.user && (req.user.role === 'admin' || req.user.role === 'team-leader')) {
+    next();
+  } else {
+    res.status(403).json({ error: 'Access denied. Admin or team leader only.' });
   }
 }; 

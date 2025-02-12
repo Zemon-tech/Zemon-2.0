@@ -15,6 +15,8 @@ instance.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    // Ensure credentials are included
+    config.withCredentials = true;
     return config;
   },
   (error) => {
@@ -34,6 +36,14 @@ instance.interceptors.response.use(
       headers: error.response?.headers,
       config: error.config
     });
+
+    if (error.response?.status === 401) {
+      // Only redirect to login if not already on login page
+      if (!window.location.pathname.includes('/login')) {
+        localStorage.removeItem('token');
+        window.location.href = '/login';
+      }
+    }
     return Promise.reject(error);
   }
 );

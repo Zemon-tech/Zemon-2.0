@@ -1,10 +1,11 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5002/api',
+  baseURL: import.meta.env.VITE_API_URL || '/api',
   timeout: 30000,
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
   }
 });
 
@@ -15,8 +16,6 @@ instance.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    // Ensure credentials are included
-    config.withCredentials = true;
     return config;
   },
   (error) => {

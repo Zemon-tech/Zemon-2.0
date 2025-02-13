@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: '/api',  // Use relative path since we're proxying through Nginx
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
@@ -16,9 +16,15 @@ instance.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    // Add timestamp to prevent caching
+    config.params = {
+      ...config.params,
+      _t: Date.now()
+    };
     return config;
   },
   (error) => {
+    console.error('Request Error:', error);
     return Promise.reject(error);
   }
 );
@@ -35,6 +41,11 @@ instance.interceptors.response.use(
       headers: error.response?.headers,
       config: error.config
     });
+
+    // Network errors
+    if (!error.response) {
+      console.error('Network Error - Please check your connection or try again later');
+    }
 
     if (error.response?.status === 401) {
       // Only redirect to login if not already on login page
